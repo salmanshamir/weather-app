@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather App</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Weather Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="weather-container">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="logo">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <span>SkyCast</span>
+            </div>
+
+            <div class="header-text">
+                Weather Forecast
+            </div>
+
+        </header>
+
+  
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-overlay" id="flashOverlay">
+            <div class="flash-container">
+
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+
+                        <div class="flash-icon">
+                            {% if category == 'success' %}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {% elif category == 'error' %}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {% elif category == 'warning' %}
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-info"></i>
+                            {% endif %}
+                        </div>
+
+                        <div class="flash-content">
+                            <strong>
+                                {{ category|capitalize if category else 'Notification' }}
+                            </strong>
+                            <p>{{ message }}</p>
+                        </div>
+
+                        <button class="flash-close"
+                                onclick="this.closest('.flash-message').remove()"
+                                aria-label="Close notification">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
+
+
+
+
+        <!-- SEARCH SECTION -->
+        <section class="search-section">
+
+            <form action="{{ url_for("weather") }}" method="POST" class="search-form">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="Search for a city..."
+                    required
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- MAIN WEATHER SECTION -->
+        <main>
+
+            <section class="main-weather">
+
+                <div class="location-info">
+
+                    <h1>{{ city }}</h1>
+
+                    <p>{{ country }}</p>
+
+                    <span class="date">
+                        {{ date }}
+                    </span>
+
+                </div>
+
+
+                <div class="weather-main">
+
+                    <div class="weather-icon">
+
+                        <img
+                            src="https://openweathermap.org/img/wn/{{ icon }}@4x.png"
+                            alt="{{ description }}"
+                        >
+
+                    </div>
+
+                    <div class="temperature">
+
+                        <h2>{{ temperature }}<sup>°C</sup></h2>
+
+                        <p>{{ description }}</p>
+
+                        <span>
+                            Feels like {{ feels_like }}°C
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="weather-summary">
+
+                    <div>
+                        <span>Minimum</span>
+                        <strong>{{ temp_min }}°C</strong>
+                    </div>
+
+                    <div>
+                        <span>Maximum</span>
+                        <strong>{{ temp_max }}°C</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WEATHER DETAILS -->
+            <section class="details-section">
+
+                <div class="section-heading">
+                    <h2>Weather Details</h2>
+                    <p>Current atmospheric conditions</p>
+                </div>
+
+
+                <div class="details-grid">
+
+                    <!-- HUMIDITY -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon humidity">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+
+                        <div>
+                            <p>Humidity</p>
+                            <h3>{{ humidity }}%</h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- WIND -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon wind">
+                            <i class="fa-solid fa-wind"></i>
+                        </div>
+
+                        <div>
+                            <p>Wind Speed</p>
+                            <h3>{{ wind_speed }} m/s</h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRESSURE -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon pressure">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+
+                        <div>
+                            <p>Pressure</p>
+                            <h3>{{ pressure }} hPa</h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISIBILITY -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+
+                        <div>
+                            <p>Visibility</p>
+                            <h3>{{ visibility }} km</h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUNRISE -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon sunrise">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+
+                        <div>
+                            <p>Sunrise</p>
+                            <h3>{{ sunrise }}</h3>
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUNSET -->
+                    <div class="detail-card">
+
+                        <div class="detail-icon sunset">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+
+                        <div>
+                            <p>Sunset</p>
+                            <h3>{{ sunset }}</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <p>
+                <i class="fa-solid fa-cloud-sun"></i>
+                SkyCast Weather Application
+            </p>
+
+            <span>Powered by OpenWeather</span>
+
+        </footer>
+
+    </div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

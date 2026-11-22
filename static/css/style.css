@@ -1,0 +1,616 @@
+
+/* ==============================
+   GLOBAL STYLING
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(
+        135deg,
+        #080e1c,
+        #111c35,
+        #172554
+    );
+    color: #f8fafc;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+.weather-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* ==============================
+   HEADER
+================================ */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo i {
+    color: #38bdf8;
+    font-size: 30px;
+}
+
+.header-text {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+
+/* ==============================
+   SEARCH SECTION
+================================ */
+
+.search-section {
+    margin-bottom: 40px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 15px;
+    padding: 10px 12px 10px 20px;
+
+    backdrop-filter: blur(15px);
+}
+
+.search-form i {
+    color: #38bdf8;
+}
+
+.search-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: white;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.search-form input::placeholder {
+    color: #94a3b8;
+}
+
+.search-form button {
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 13px 25px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(14, 165, 233, 0.3);
+}
+
+
+/* ==============================
+   MAIN WEATHER
+================================ */
+
+.main-weather {
+    background: linear-gradient(
+        120deg,
+        rgba(30, 58, 138, 0.55),
+        rgba(30, 41, 59, 0.65)
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+
+    padding: 35px 40px;
+    margin-bottom: 40px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.location-info h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.location-info p {
+    color: #cbd5e1;
+    font-size: 15px;
+}
+
+.date {
+    display: block;
+    margin-top: 12px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* ==============================
+   TEMPERATURE
+================================ */
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.weather-icon img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.temperature h2 {
+    font-size: 75px;
+    font-weight: 700;
+    letter-spacing: -5px;
+}
+
+.temperature sup {
+    font-size: 30px;
+    vertical-align: top;
+    margin-left: 5px;
+    letter-spacing: 0;
+}
+
+.temperature p {
+    font-size: 19px;
+    color: #38bdf8;
+    text-transform: capitalize;
+    margin: 5px 0 10px;
+}
+
+.temperature span {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+
+/* ==============================
+   MIN / MAX TEMPERATURE
+================================ */
+
+.weather-summary {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 22px;
+}
+
+.weather-summary div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.weather-summary span {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.weather-summary strong {
+    font-size: 18px;
+}
+
+
+/* ==============================
+   WEATHER DETAILS
+================================ */
+
+.details-section {
+    margin-bottom: 45px;
+}
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    font-size: 23px;
+    margin-bottom: 7px;
+}
+
+.section-heading p {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.detail-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 17px;
+    padding: 22px;
+
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.detail-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+.detail-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+.humidity {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+}
+
+.wind {
+    color: #a78bfa;
+    background: rgba(167, 139, 250, 0.12);
+}
+
+.pressure {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+}
+
+.visibility {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.12);
+}
+
+.sunrise {
+    color: #fb923c;
+    background: rgba(251, 146, 60, 0.12);
+}
+
+.sunset {
+    color: #c084fc;
+    background: rgba(192, 132, 252, 0.12);
+}
+
+.detail-card p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 7px;
+}
+
+.detail-card h3 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+
+/* ==============================
+   FOOTER
+================================ */
+
+.footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.footer i {
+    color: #38bdf8;
+    margin-right: 7px;
+}
+
+
+/* ==============================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 768px) {
+
+    .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-weather {
+        padding: 28px;
+    }
+
+    .temperature h2 {
+        font-size: 60px;
+    }
+
+    .weather-icon img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 20px 14px;
+    }
+
+    .header-text {
+        display: none;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .search-form {
+        gap: 10px;
+        padding-left: 13px;
+    }
+
+    .search-form button {
+        padding: 12px 15px;
+    }
+
+    .main-weather {
+        padding: 22px;
+    }
+
+    .weather-main {
+        gap: 10px;
+    }
+
+    .weather-icon img {
+        width: 95px;
+        height: 95px;
+    }
+
+    .temperature h2 {
+        font-size: 47px;
+        letter-spacing: -3px;
+    }
+
+    .temperature sup {
+        font-size: 20px;
+    }
+
+    .temperature p {
+        font-size: 15px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-summary {
+        gap: 30px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
+
+
+
+/* ==============================
+   FLASH MESSAGE NOTIFICATIONS
+================================ */
+
+.flash-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(3, 10, 25, 0.45);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    padding: 20px;
+}
+
+.flash-container {
+    width: 100%;
+    max-width: 420px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.flash-message {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 20px;
+
+    background: rgba(23, 37, 84, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+
+    color: #F8FAFC;
+
+    animation: flashAppear 0.35s ease-out;
+}
+
+/* Icon */
+
+.flash-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* Message content */
+
+.flash-content {
+    flex: 1;
+}
+
+.flash-content strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.flash-content p {
+    color: #CBD5E1;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Close button */
+
+.flash-close {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+
+    font-size: 17px;
+    cursor: pointer;
+
+    padding: 5px;
+    transition: 0.2s ease;
+}
+
+.flash-close:hover {
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+
+/* Success */
+
+.flash-message.success {
+    border-left: 4px solid #22C55E;
+}
+
+.flash-message.success .flash-icon {
+    background: rgba(34, 197, 94, 0.13);
+    color: #4ADE80;
+}
+
+/* Error */
+
+.flash-message.error {
+    border-left: 4px solid #EF4444;
+}
+
+.flash-message.error .flash-icon {
+    background: rgba(239, 68, 68, 0.13);
+    color: #F87171;
+}
+
+/* Warning */
+
+.flash-message.warning {
+    border-left: 4px solid #F59E0B;
+}
+
+.flash-message.warning .flash-icon {
+    background: rgba(245, 158, 11, 0.13);
+    color: #FBBF24;
+}
+
+/* Information */
+
+.flash-message.info {
+    border-left: 4px solid #22D3EE;
+}
+
+.flash-message.info .flash-icon {
+    background: rgba(34, 211, 238, 0.13);
+    color: #22D3EE;
+}
+
+/* Animation */
+
+@keyframes flashAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+    .flash-message {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .flash-content p {
+        font-size: 12px;
+    }
+}
